@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<body>
+    <h1>To-Do-List</h1>
+    <div class="container">
+        <input type="text" id="taskinput" placeholder="Type your task here">
+        <span class="buttons"><button id="add">Add</button><button id="clear">Clear</button><button id="delete">delete all</button></span>
+        <div class="list">
+            <ul id="tasklist">
+            </ul>
+    </div>
+    </div>
+    <br>
+    
+    
+    <script>
+        const taskInput = document.getElementById("taskinput")
+        const addButton = document.getElementById("add")
+        const tasklist = document.getElementById("tasklist")
+        const delButton = document.getElementById("delete")
+        const cleardoneButton = document.getElementById("clear")
+        addButton.addEventListener("click", function () {
+            const taskText = taskInput.value.trim()
+            if (taskText === "") {return;}
+            const newItem = document.createElement("li");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            const taskSpan = document.createElement("span")
+            taskSpan.textContent = taskText
+            newItem.appendChild(checkbox)
+            newItem.appendChild(taskSpan)
+            tasklist.appendChild(newItem);
+            taskInput.value = "";
+        delButton.addEventListener("click", function () {
+            tasklist.innerHTML = "";
+        })
+        })
+        cleardoneButton.addEventListener("click", function () {
+            const items = tasklist.querySelectorAll("li")
+            items.forEach(function (item) {
+                const checkbox = item.querySelector("input");
+                if (checkbox.checked) {
+                    item.remove();
+                }
+            })
+        })
+    </script>
+</body>
+</html>
